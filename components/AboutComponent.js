@@ -5,7 +5,7 @@ import { Text, ScrollView } from "react-native";
 import { Card } from "react-native-elements";
 import { PARTNERS } from "../shared/partners";
 
-function Mission() {
+function Mission({ partners }) {
   return (
     <Card>
       <Text>
