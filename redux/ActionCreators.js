@@ -174,3 +174,8 @@ export const addComment = comment => {
         payload: newComment
     });
 };
+
+export const deleteFavorite = campsiteId => ({
+    type: ActionTypes.DELETE_FAVORITE,
+    payload: campsiteId
+});
