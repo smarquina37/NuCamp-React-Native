@@ -24,6 +24,7 @@ class Directory extends Component {
                 <Tile
                     title={item.name}
                     caption={item.description}
+                    featured
                     onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
                     imageSrc={{uri: baseUrl + item.image}}
                 />
