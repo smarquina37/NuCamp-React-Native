@@ -164,11 +164,11 @@ export const postComment = (campsiteId, rating, author, text) => (dispatch) => {
   newComment.date = new Date().toISOString();
    
     setTimeout(() => {
-        dispatch(addComment(comment));
+        dispatch(addComment(newComment));
     }, 2000);
 };
 
-export const addComment = comment => {
+export const addComment = newComment => {
     return ({
         type: ActionTypes.ADD_COMMENT,
         payload: newComment

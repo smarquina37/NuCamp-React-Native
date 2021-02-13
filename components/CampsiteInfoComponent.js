@@ -3,7 +3,7 @@ import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet, Alert, Pan
 import { Card, Icon, Rating, Input } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
-import { postFavorite } from '../redux/ActionCreators';
+import { postComment, postFavorite } from '../redux/ActionCreators';
 import * as Animatable from "react-native-animatable";
 
 const mapStateToProps = state => {
@@ -27,6 +27,8 @@ function RenderCampsite(props) {
     const view = React.createRef();
 
     const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
+
+    const recognizeComment = ({dx}) => (dx < 200) ? true : false;
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -54,6 +56,8 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 );
+            } else if (recognizeComment(gestureState)) {
+              props.onShowModal()
             }
             return true;
         }
@@ -147,6 +151,7 @@ class CampsiteInfo extends Component {
   handleComment(campsiteId) {
     console.log(JSON.stringify());
     this.toggleModal();
+    this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text)
   }
 
   resetForm() {
@@ -208,8 +213,8 @@ class CampsiteInfo extends Component {
               placeholder='Comment'
               leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
               leftIconContainerStyle = {{paddingRight:10}}
-              onChangeText={comment => this.setState({comment: comment})}
-              value={this.state.comment}
+              onChangeText={text => this.setState({text: text})}
+              value={this.state.text}
               />
               </View>
               <View>
